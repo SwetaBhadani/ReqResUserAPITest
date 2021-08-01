@@ -8,18 +8,18 @@ public class Hook {
 
     @Before
     public void initialize(Scenario scenario) {
-        System.out.println(scenario + " STARTS");
+        System.out.println(scenario.getName() + " STARTS");
     }
 
 
     @After
     public void tearDown(Scenario scenario) {
         if(scenario.isFailed()){
-            System.out.println(scenario + " FAILED!! :( ");
+            System.out.println(scenario.getName() + " FAILED!! :( ");
         }
         else {
-            System.out.println(scenario + " PASSED!! :) ");
+            System.out.println(scenario.getName() + " PASSED!! :) ");
         }
-        System.out.println(scenario + " ENDS");
+        System.out.println(scenario.getName() + " ENDS");
     }
 }

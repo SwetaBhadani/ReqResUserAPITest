@@ -64,4 +64,18 @@ public class UserAPIStepDefinition {
         Assert.assertEquals(201, createUserResponse.getStatusCode());
     }
 
+
+    @When("I hit the endpoint with invalid request body")
+    public void i_hit_the_endpoint_with_invalid_request_body() throws JsonProcessingException {
+        createUserAPIRequest = requestHelper.getCreateUserAPIInvalidRequest();
+        createUserResponse = reqResServiceHelper.createUser(createUserAPIRequest);
+    }
+
+    @Then("I get an error with {int} status code")
+    public void i_get_an_error_with_status_code(int statusCode) {
+
+        Assert.assertEquals(statusCode, createUserResponse.getStatusCode());
+    }
+
+
 }

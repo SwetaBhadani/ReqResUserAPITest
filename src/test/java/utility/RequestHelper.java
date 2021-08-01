@@ -22,4 +22,8 @@ public class RequestHelper {
 
         return jsonObject.toString();
     }
+
+    public String getCreateUserAPIInvalidRequest() {
+        return "{\"\"}";
+    }
 }
