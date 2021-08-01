@@ -1,4 +1,4 @@
-Feature: Tests ReqRes User API
+Feature: Tests
 
   Scenario: Verify the creation of a user
     Given I have the endpoint to create a user

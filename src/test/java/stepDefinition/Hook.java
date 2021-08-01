@@ -7,13 +7,19 @@ import io.cucumber.java.Scenario;
 public class Hook {
 
     @Before
-    public void InitializeTest(Scenario scenario) {
-
+    public void initialize(Scenario scenario) {
+        System.out.println(scenario + " STARTS");
     }
 
 
     @After
-    public void TearDownTest(Scenario scenario) {
-
+    public void tearDown(Scenario scenario) {
+        if(scenario.isFailed()){
+            System.out.println(scenario + " FAILED!! :( ");
+        }
+        else {
+            System.out.println(scenario + " PASSED!! :) ");
+        }
+        System.out.println(scenario + " ENDS");
     }
 }
