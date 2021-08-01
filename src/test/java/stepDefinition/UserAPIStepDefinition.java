@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import responsePojo.CreateUserResponse;
+import responsePojo.GetUsersResponse;
 import utility.Commons;
 import utility.ReqResServiceHelper;
 import utility.RequestHelper;
@@ -25,21 +26,22 @@ public class UserAPIStepDefinition {
     Response createUserResponse;
     String createUserAPIRequest;
 
+    Response getUsersResponse;
+
     public UserAPIStepDefinition() {
         reqResServiceHelper = new ReqResServiceHelper();
         requestHelper = new RequestHelper();
         objectMapper = new ObjectMapper();
     }
 
-    @Given("I have the endpoint to create a user")
-    public void i_have_the_endpoint_to_create_a_user() {
+    @Given("As a user, I have a valid endpoint")
+    public void i_have_the_endpoint() {
 
         RestAssured.baseURI = Commons.USER_API_URL;
     }
 
     @When("I hit a request with below details to create a user")
     public void i_hit_a_request_with_below_details_to_create_a_user(List<Map<String, String>> dataTable) throws JsonProcessingException {
-//        System.out.println("okie");
 
         for (Map<String, String> map : dataTable) {
             String name = map.get("name");
@@ -59,9 +61,9 @@ public class UserAPIStepDefinition {
 
 
     @Then("I verify the status code is equal to {int}")
-    public void i_verify_the_status_code_is_equal_to(Integer int1) {
+    public void i_verify_the_status_code_is_equal_to(int statusCode) {
 
-        Assert.assertEquals(201, createUserResponse.getStatusCode());
+        Assert.assertEquals(statusCode, createUserResponse.getStatusCode());
     }
 
 
@@ -75,6 +77,27 @@ public class UserAPIStepDefinition {
     public void i_get_an_error_with_status_code(int statusCode) {
 
         Assert.assertEquals(statusCode, createUserResponse.getStatusCode());
+    }
+
+
+    @When("I hit a GET request")
+    public void i_hit_a_get_request() {
+        getUsersResponse = reqResServiceHelper.getUsers();
+    }
+
+    @Then("I get the success response with status code {int}")
+    public void i_get_the_success_response_with_status_code(int statusCode) {
+        Assert.assertEquals(statusCode, getUsersResponse.getStatusCode());
+    }
+
+    @Then("I validate number of users returned is equal to per page value")
+    public void i_validate_number_of_users_returned_is_equal_to_per_page_value() throws JsonProcessingException {
+        GetUsersResponse getUsersResponseJson = objectMapper.readValue(getUsersResponse.getBody().asString(), GetUsersResponse.class);
+
+        int perPageCount = getUsersResponseJson.getPer_page();
+        int userDataLength = getUsersResponseJson.getData().size();
+
+        Assert.assertEquals(perPageCount, userDataLength);
     }
 
 

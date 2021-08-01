@@ -1,20 +1,16 @@
 package utility;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReqResServiceHelper {
 
-    ObjectMapper objectMapper;
-
-    public ReqResServiceHelper() {
-        this.objectMapper = new ObjectMapper();
-    }
-
-    public Response createUser(String createUserAPIRequest) throws JsonProcessingException {
+    public Response createUser(String createUserAPIRequest) {
 
 //        System.out.println("createUserAPIRequest: " + createUserAPIRequest);
 
@@ -27,6 +23,22 @@ public class ReqResServiceHelper {
 //        System.out.println("apiresponsestatus line: " + response.getStatusLine());
 
         return response;
+    }
+
+    public Response getUsers() {
+        return getUsers(new HashMap<>());
+    }
+
+    public Response getUsers(Map<String, Integer> queryParam) {
+        RequestSpecification request = RestAssured.given();
+
+        for (Map.Entry<String, Integer> entry : queryParam.entrySet()) {
+            request.queryParam(entry.getKey(), entry.getValue());
+        }
+
+        Response responseGetUser = request.get("/users");
+
+        return responseGetUser;
     }
 
 }

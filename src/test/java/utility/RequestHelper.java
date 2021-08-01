@@ -14,7 +14,7 @@ public class RequestHelper {
     }
 
     public String getCreateUserAPIRequest(Map<String, String> map) {
-        JSONObject jsonObject = new JSONObject(); // {}
+        JSONObject jsonObject = new JSONObject();
 
         for (Map.Entry<String, String> entry : map.entrySet()) {
             jsonObject.put(entry.getKey(), entry.getValue());
