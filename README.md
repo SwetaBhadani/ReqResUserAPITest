@@ -1,5 +1,5 @@
 # ReqResUserAPITest
-Java+Rest Assured+CucumberBDD+Maven
+Java, RestAssured, CucumberBDD, Maven, TestNg
 
 
 This Java maven project uses Rest Assured libraries and Cucumber/BDD to automate tests for the given api
