@@ -20,6 +20,6 @@ public class Hook {
         else {
             System.out.println(scenario.getName() + " PASSED!! :) ");
         }
-        System.out.println(scenario.getName() + " ENDS");
+
     }
 }
