@@ -17,5 +17,18 @@ Feature: Test reqres.in API
 
   Scenario: Verify retrieving all users with default per page query param
     When I hit a GET request
-    Then I get the success response with status code 200
+    Then I verify the status code is equal to 200
     And I validate number of users returned is equal to per page value
+
+  Scenario: Verify retrieving single user with id
+    When I hit a GET request with user id 1
+    Then I verify the status code is equal to 200
+    And I validate the user details for user id 1 is same as below
+
+      | id | email                  | first_name | last_name |
+      | 1  | george.bluth@reqres.in | George     | Bluth     |
+
+
+  Scenario: Verify retrieving single user with invalid user id
+    When I hit a GET request with user id 0
+    Then I verify the status code is equal to 404

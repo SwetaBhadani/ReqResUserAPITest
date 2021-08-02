@@ -41,4 +41,12 @@ public class ReqResServiceHelper {
         return responseGetUser;
     }
 
+    public Response getUsersById(int id) {
+        String path = String.format("/users/%d", id);
+        Response getUserByIdResponse = RestAssured.given()
+                .get(path);
+    return getUserByIdResponse;
+    }
+
+
 }
