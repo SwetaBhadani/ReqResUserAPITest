@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.Assert;
+import org.testng.Assert;
 import responsePojo.CreateUserResponse;
 import responsePojo.GetUserByIDResponse;
 import responsePojo.GetUsersResponse;

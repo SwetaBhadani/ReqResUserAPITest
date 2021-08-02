@@ -14,7 +14,6 @@ Feature: Test reqres.in API
     When I hit the endpoint with invalid request body
     Then I get an error with 400 status code
 
-
   Scenario: Verify retrieving all users with default per page query param
     When I hit a GET request
     Then I verify the status code is equal to 200
@@ -24,10 +23,8 @@ Feature: Test reqres.in API
     When I hit a GET request with user id 1
     Then I verify the status code is equal to 200
     And I validate the user details for user id 1 is same as below
-
       | id | email                  | first_name | last_name |
       | 1  | george.bluth@reqres.in | George     | Bluth     |
-
 
   Scenario: Verify retrieving single user with invalid user id
     When I hit a GET request with user id 0
